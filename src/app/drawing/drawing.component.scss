@@ -1,0 +1,67 @@
+@import '../../colors.scss';
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    .word {
+        display: flex;
+        font-size: 4em;
+        letter-spacing: 20px;
+        height: auto;
+    }
+    .absolute_forgot {
+        position: absolute;
+        bottom: 1em;
+        right: 1em;
+        button {
+            span {
+                width: 3em;
+                height: 3em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                fa-icon {
+                    font-size: 1em;
+                }
+            }
+        }
+    }
+    .timer {
+        position: absolute;
+        right: 1em;
+        top: 1em;
+        font-size: 2em;
+        width: 2em;
+        height: 2em;
+        background-color: $primary;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.endRoundScreen {
+    position: absolute;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $textOnPrimary;
+    top: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    font-size: 3em;
+    transition: all ease-in-out 0.5s;
+}
+
+.show {
+    opacity: 1;
+    top: 0;
+}

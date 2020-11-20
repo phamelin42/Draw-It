@@ -1,0 +1,27 @@
+<section class="container">
+    <span class="word">
+        <p *ngFor="let letter of (wordObs | async).split(''); let i = index">
+            <ng-container *ngIf="letter && letter !== ' ' && clues.includes(i)">{{letter}}</ng-container>
+            <ng-container *ngIf="letter && letter !== ' ' && !clues.includes(i)">_</ng-container>
+            <ng-container *ngIf="letter === ' '">&nbsp;</ng-container>
+        </p>
+    </span>
+    <article class="timer">
+        <p>{{timeLeft}}</p>
+    </article>
+    <div class="absolute_forgot">
+        <article class="forgot_word">
+            <button (click)="overlayRef.toggle($event)" type="button" icon="pi pi-question" class="p-button-rounded"><span><fa-icon [icon]="faQuestion"></fa-icon></span></button>
+        </article>
+    </div>
+    <button (click)="chooseWinner()"></button>
+    <section [ngClass]="(timeLeft === 0 || winner) ? 'show' : ''" class="endRoundScreen">
+        <p>Le mot était {{wordObs | async}}</p>
+        <p>Début du round dans {{roundRestart}}</p>
+    </section>
+</section>
+<p-overlayPanel #overlayRef>
+    <div class="overlay">
+        <h3>{{wordObs | async}}</h3>
+    </div>
+</p-overlayPanel>

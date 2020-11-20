@@ -1,0 +1,7 @@
+<article class="container">
+  <app-player-list></app-player-list>
+    <section id="backdrop" class="outlet" [@slider]="o && o.activatedRouteData 
+    && o.activatedRouteData['animation']">
+      <router-outlet #o="outlet"></router-outlet>
+    </section>
+</article>

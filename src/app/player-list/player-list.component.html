@@ -1,0 +1,6 @@
+<ul class="player_list">
+    <li (click)="givePoint(player)" *ngFor="let player of (playerList | async)" [ngClass]="(player.id === (activePlayer | async)) ? 'active' : ''" class="player">
+        <h2>{{player.name}}</h2>
+        <p>{{player.score}}</p>
+    </li>
+</ul>

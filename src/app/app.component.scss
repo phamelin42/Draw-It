@@ -1,0 +1,7 @@
+.container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    height: 100vh;
+    background-image: url('../assets/background_pattern.png');
+    background-size: 30em;
+}
