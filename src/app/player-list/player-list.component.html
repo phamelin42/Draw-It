@@ -1,6 +1,14 @@
-<ul class="player_list">
-    <li (click)="givePoint(player)" *ngFor="let player of (playerList | async)" [ngClass]="(player.id === (activePlayer | async)) ? 'active' : ''" class="player">
-        <h2>{{player.name}}</h2>
-        <p>{{player.score}}</p>
-    </li>
-</ul>
+<aside class="container">
+    <p class="rounds">Round : {{actualRound | async}} / {{totalRound | async}}</p>
+    <ul class="player_list">
+        <li (click)="givePoint(player)" *ngFor="let player of (playerList | async)" [ngClass]="(player.id === (activePlayer | async)) ? 'active' : ''" class="player">
+            <h2>{{player.name}}</h2>
+            <p>{{player.score}}</p>
+        </li>
+    </ul>
+</aside>
+
+<section [ngClass]="(winner) ? 'show' : ''" class="endRoundScreen">
+    <p>Le mot était {{word | async}}</p>
+    <p>Début du round dans {{roundRestart}}</p>
+</section>

@@ -1,0 +1,8 @@
+<section class="container">
+    <h1 *ngIf="(first | async) as firstWinner">Félicitations à {{firstWinner}} !!!</h1>
+    <h2 *ngIf="(second | async) as secondWinner">Dommage pour {{secondWinner.name}}</h2>
+    <h2 *ngIf="(third | async) as thirdWinner">{{thirdWinner.name}} est aussi sur le podium, avec un score de {{thirdWinner.score}}</h2>
+    <h3 *ngFor="let player of restOfPlayers | async">
+        {{player.name | titlecase}} était là aussi, c'est vrai...
+    </h3>
+</section>

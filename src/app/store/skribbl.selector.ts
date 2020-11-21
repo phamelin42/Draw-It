@@ -32,3 +32,16 @@ export const selectPlayerList = createSelector(gameData, (state) => state.gameSe
 
 export const selectActivePlayer = createSelector(gameData, (state) => state.gameSettings.activePlayerId);
 export const selectActiveRound = createSelector(gameData, (state) => state.gameSettings.activeRound);
+
+export const selectOrderedListByScore = createSelector(selectPlayerList, (players) => {
+    return players.sort((a, b) => (a.score > b.score) ? 1 : (a.score === b.score) ? ((a.score > b.score) ? 1 : -1) : -1 )
+});
+
+export const isGameOver = createSelector(gameData, (state) => (state.gameSettings.activeRound > state.gameSettings.numberOfRound) ? true : false);
+
+export const selectWinner = createSelector(selectOrderedListByScore, (players) => players[0]);
+export const selectSecond = createSelector(selectOrderedListByScore, (players) => players[1]);
+export const selectThird = createSelector(selectOrderedListByScore, (players) => players[2]);
+export const selectPodium = createSelector(selectOrderedListByScore, (players) => players.splice(3, players.length - 3));
+export const selectRest = createSelector(selectOrderedListByScore, (players) => players.splice(0, 3));
+

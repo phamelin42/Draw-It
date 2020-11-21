@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 import { DrawingComponent } from './drawing/drawing.component';
 import { DrawingModule } from './drawing/drawing.module';
 import { PlayerListModule } from './player-list/player-list.module';
+import { EndOfGameModule } from './end-of-game/end-of-game.module';
+import { EndOfGameComponent } from './end-of-game/end-of-game.component';
 
 export const appRouteList: Routes = [
   {
@@ -32,6 +34,11 @@ export const appRouteList: Routes = [
       path: 'draw',
       data: { animation: 'centerLeft' },
       component: DrawingComponent
+  },
+  {
+      path: 'end',
+      data: { animation: 'centerLeft' },
+      component: EndOfGameComponent
   },
   {
       path: '**',
@@ -51,6 +58,7 @@ export const appRouteList: Routes = [
     BrowserAnimationsModule,
     ChooseWordModule,
     FontAwesomeModule,
+    EndOfGameModule,
     HomeModule,
     RouterModule.forRoot(appRouteList),
     StoreModule.forRoot({}),

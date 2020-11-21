@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 20% 80%;
     height: 100vh;
-    background-image: url('../assets/background_pattern.png');
-    background-size: 30em;
+    background-image: url('../assets/seamless-wood-texture-5.png');
+    background-size: cover;
+    overflow: hidden;
 }

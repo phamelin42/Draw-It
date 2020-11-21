@@ -8,5 +8,5 @@ import { Animations } from './app.animations';
   animations: [Animations.slider]
 })
 export class AppComponent {
-  title = 'Skribbl';
+  title = 'Drou it';
 }

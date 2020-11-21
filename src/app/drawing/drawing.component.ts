@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { GameState, selectActiveWord, selectRoundNumber, selectTime } from '../store/skribbl.selector';
+import { GameState, isGameOver, selectActiveWord, selectRoundNumber, selectTime } from '../store/skribbl.selector';
 
 @Component({
   selector: 'app-drawing',
@@ -17,21 +17,23 @@ export class DrawingComponent implements OnInit, OnDestroy {
   public word: string;
   public timeLeft: number;
   public timeSubscription: Subscription;
+  public endSubscription: Subscription;
   public roundNumber: Observable<number>;
-  public roundRestart: number;
-  public winner: boolean;
   public originalTime: number;
   public clues: Array<number> = [];
   public timeLeftInterval: any;
-  public restartInterval: any;
   public faQuestion = faQuestion;
   constructor(private store: Store<GameState>, private router: Router) { }
 
   ngOnInit(): void {
-    this.roundRestart = 5;
-    this.winner = false;
     this.wordObs = this.store.pipe(select(selectActiveWord))
     this.wordSubscription = this.wordObs.subscribe(x => this.word = x);
+    this.endSubscription = this.store.pipe(select(isGameOver)).subscribe(x => {
+      console.log(x);
+      if (x === true) {
+        this.router.navigate(['/end']);
+      }
+    })
     this.timeSubscription = this.store.pipe(select(selectTime)).subscribe(x => {
       this.timeLeft = x;
       this.originalTime = x;
@@ -45,28 +47,10 @@ export class DrawingComponent implements OnInit, OnDestroy {
         }
       }
     }, 1000)
-    this.restartInterval = setInterval(() => {
-      if (this.winner === true || this.timeLeft === 0) {
-        if (this.roundRestart > 0) {
-          this.roundRestart--;
-        } else {
-          // this.store.dispatch(new SetActivePlayer());
-          this.router.navigate(['/choose-word'])
-        }
-      }
-    }, 1000)
-  }
-
-  chooseWinner() {
-      if (!this.winner) {
-        this.winner = true;
-    }
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.restartInterval);
     clearInterval(this.timeLeftInterval);
-    this.roundRestart = 5;
     this.timeSubscription.unsubscribe();
     this.wordSubscription.unsubscribe();
   }

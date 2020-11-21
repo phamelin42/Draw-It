@@ -3,10 +3,10 @@ import { GameSettingsActions, GameSettingsActionsTypes } from '../actions/game-a
 import * as R from 'ramda';
 
 export const initialState: GameSettings =  {
-    numberOfRound: 3,
-    durationOfRound: 120,
+    numberOfRound: 1,
+    durationOfRound: 10,
     players: [],
-    activeRound: 0,
+    activeRound: 1,
     activePlayerId: 1,
     selectedWord: ''
 };
@@ -19,18 +19,26 @@ export function gameSettingsReducer(state = initialState, action: GameSettingsAc
         return {...state, durationOfRound: action.payload};
     case GameSettingsActionsTypes.SetActivePlayer:
         if (state.activePlayerId === state.players.length) {
-            return {...state, activePlayerId: 1}
+            return {...state, activePlayerId: 1, activeRound: state.activeRound + 1};
         } else {
-            return {...state, activePlayerId: state.activePlayerId++};
+            return {...state, activePlayerId: state.activePlayerId + 1};
         }
+    case GameSettingsActionsTypes.SetActiveRound:
+        return {...state, activeRound: state.activeRound + 1};
     case GameSettingsActionsTypes.SetPlayer:
         return R.set(R.lensProp('players'), R.append({name: action.payload, id: state.players.length +1, score: 0}, state.players), state)
     case GameSettingsActionsTypes.SelectWord:
         return {...state, selectedWord: action.payload};
     case GameSettingsActionsTypes.GivePoint:
-        const playerIndex = state.players.findIndex(x => x.id === action.payload - 1);
-        console.log(playerIndex);
-        return R.set(R.lensPath('players', playerIndex, 'score'), state.players[playerIndex].score++, state)
+        return {...state,
+            players: state.players.map(player => {
+                if (player.id === action.payload) {
+                    return {name: player.name, id: player.id, score: player.score + 10}
+                } else {
+                    return player;
+                }
+            })
+        }
     default:
         return state;
   }
