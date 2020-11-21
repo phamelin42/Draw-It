@@ -1,11 +1,14 @@
 <section class="content">
     <article class="settings">
-        <label>Number of round<p-dropdown (onChange)="setRoundNumber($event.value)" [options]="roundNumber"></p-dropdown></label>
-        <label>Time of each round<p-dropdown (onChange)="setRoundTime($event.value)" [options]="roundTime"></p-dropdown></label>
+        <h3>Nombre de rounds: {{selectedRoundNumber | async}}</h3>
+        <ul class="rounds_container">
+        	<li *ngFor="let number of roundNumber" [ngClass]="{'selected': number.value === (selectedRoundNumber | async) }" (click)="setRoundNumber(number.value)">{{number.label}}</li>
+        </ul>
+        <label>Durée d'un round<p-dropdown (onChange)="setRoundTime($event.value)" [options]="roundTime"></p-dropdown></label>
     </article>
     <form (submit)="setPlayer(player.value, $event)" class="players">
         <input maxLength="25" name="name" #player type="text" [(ngModel)]="pName">
         <button (click)="setPlayer(player.value)" type="button" label="Add player"><span>Add Player <fa-icon [icon]="faPlus"></fa-icon></span></button>
     </form>
-    <a routerLink="/choose-word" class="play">Play <fa-icon [icon]="faPlay"></fa-icon></a>
+    <a routerLink="/choose-word" class="play">C'est parti ! <fa-icon [icon]="faPlay"></fa-icon></a>
 </section>
