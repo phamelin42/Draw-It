@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select} from '@ngrx/store';
+import { selectRoundNumber } from '../store/skribbl.selector';
 import { SetPlayer, SetRound, SetTime } from '../store/actions/game-actions';
 import { GameState } from '../store/skribbl.selector';
 import { faPlay, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
 
   public roundNumber: Array<{label: string, value: any}>;
   public roundTime: Array<{label: string, value: any}>;
   public pName: string = '';
+  public selectedRoundNumber: Observable<number>;
+
   public faPlay = faPlay;
   public faPlus = faPlus;
+
   constructor(private store: Store<GameState>) { }
 
   
@@ -41,6 +48,7 @@ export class HomeComponent implements OnInit {
       {label:'220', value: 220},
       {label:'240', value: 240},
     ];
+    this.selectedRoundNumber = this.store.pipe(select(selectRoundNumber));
   }
 
   setRoundNumber(val: number) {
