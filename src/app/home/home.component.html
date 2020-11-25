@@ -1,14 +1,21 @@
 <section class="content">
+    <header><h1 class="drou">Drou&nbsp;</h1><h1 class="it">it</h1></header>
     <article class="settings">
-        <h3>Nombre de rounds: {{selectedRoundNumber | async}}</h3>
+        <h3>Amount of rounds: {{selectedRoundNumber | async}}</h3>
         <ul class="rounds_container">
-        	<li *ngFor="let number of roundNumber" [ngClass]="{'selected': number.value === (selectedRoundNumber | async) }" (click)="setRoundNumber(number.value)">{{number.label}}</li>
+        	<li *ngFor="let number of roundNumber" [ngClass]="{'selected': number.value === (selectedRoundNumber | async) }" class="round_number" (click)="setRoundNumber(number.value)">
+                {{number.label}}
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 152.9 43.4" style="enable-background:new 0 0 152.9 43.4;" xml:space="preserve">
+                    <path d="M151.9,13.6c0,0,3.3-9.5-85-8.3c-97,1.3-58.3,29-58.3,29s9.7,8.1,69.7,8.1c68.3,0,69.3-23.1,69.3-23.1 s1.7-10.5-14.7-18.4"/>
+                    <!-- m 139 28 c -12 -23 -31 -30 -57 -30 c -38 -1 -49 26 -49 45 s 23 37 52 38 c 21 -2 47 -11 49 -37 s -6 -33 -11 -39 -->
+                </svg>
+            </li>
         </ul>
-        <label>Durée d'un round<p-dropdown (onChange)="setRoundTime($event.value)" [options]="roundTime"></p-dropdown></label>
+        <label>Duration of one round<p-dropdown (onChange)="setRoundTime($event.value)" [options]="roundTime"></p-dropdown></label>
     </article>
     <form (submit)="setPlayer(player.value, $event)" class="players">
         <input maxLength="25" name="name" #player type="text" [(ngModel)]="pName">
         <button (click)="setPlayer(player.value)" type="button" label="Add player"><span>Add Player <fa-icon [icon]="faPlus"></fa-icon></span></button>
     </form>
-    <a routerLink="/choose-word" class="play">C'est parti ! <fa-icon [icon]="faPlay"></fa-icon></a>
+    <a routerLink="/choose-word" class="play">Let's go ! <fa-icon [icon]="faPlay"></fa-icon></a>
 </section>

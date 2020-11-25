@@ -1,14 +1,53 @@
 .container {
-    display: grid;
-    grid-template-columns: 20% 80%;
     height: 100vh;
     background-image: url('../assets/wood_background.jpg');
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3em;
+    section {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 20%;
+        .rings {
+            height: 100%;
+            width: 4em;
+            background-size: contain;
+            background-position: right;
+            background-repeat: no-repeat;
+            background-image: url('../assets/notebook_rings.png');
+        }
+        .page {
+            height: 100%;
+            width: calc(60% - 5em);
+            background-size: cover;
+            background-position: left;
+            background-repeat: no-repeat;
+            background-image: url('../assets/page.png');
+            z-index: 2;
+        }
+        .shadow {
+            height: 100%;
+            width: 1em;
+            background-size: contain;
+            background-position: left;
+            background-repeat: no-repeat;
+            background-image: url('../assets/shadows.png');
+        }
+        .player_list {
+            position: absolute;
+            left: 0;
+        }
+    }
 }
 
 .content {
-	background-size: 68vh;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-image: url('../assets/notebook.png');
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }

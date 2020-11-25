@@ -9,6 +9,7 @@ export enum GameSettingsActionsTypes {
     SelectWord = '[Game] Select Word',
     GivePoint = '[Game] Give Point',
     SetActiveRound = '[Game] Set Active Round',
+    SetLangage = '[Game] Set Langage'
 }
 
 export class SetRound implements Action {
@@ -39,4 +40,8 @@ export class SetActiveRound implements Action {
     readonly type = GameSettingsActionsTypes.SetActiveRound;
     constructor(public payload: number) {}
 }
-export type GameSettingsActions = SetRound | SetTime | SetPlayer | SetActivePlayer | SelectWord | GivePoint | SetActiveRound;
+export class SetLangage implements Action {
+    readonly type = GameSettingsActionsTypes.SetLangage;
+    constructor(public payload: 'FR' | 'EN') {}
+}
+export type GameSettingsActions = SetRound | SetTime | SetPlayer | SetActivePlayer | SelectWord | GivePoint | SetActiveRound | SetLangage;

@@ -1,14 +1,17 @@
 import { GameSettings } from 'src/app/models/game-settings.model';
 import { GameSettingsActions, GameSettingsActionsTypes } from '../actions/game-actions';
 import * as R from 'ramda';
+import { PlayerListComponent } from 'src/app/player-list/player-list.component';
 
 export const initialState: GameSettings =  {
     numberOfRound: 1,
     durationOfRound: 10,
     players: [],
+    activePlayer: null,
     activeRound: 1,
     activePlayerId: 1,
-    selectedWord: ''
+    selectedWord: '',
+    langage: 'FR'
 };
 
 export function gameSettingsReducer(state = initialState, action: GameSettingsActions): GameSettings {
@@ -19,9 +22,9 @@ export function gameSettingsReducer(state = initialState, action: GameSettingsAc
         return {...state, durationOfRound: action.payload};
     case GameSettingsActionsTypes.SetActivePlayer:
         if (state.activePlayerId === state.players.length) {
-            return {...state, activePlayerId: 1, activeRound: state.activeRound + 1};
+            return {...state, activePlayerId: 1, activePlayer: state.players.find(x => x.id === 1), activeRound: state.activeRound + 1};
         } else {
-            return {...state, activePlayerId: state.activePlayerId + 1};
+            return {...state, activePlayerId: state.activePlayerId + 1, activePlayer: state.players.find(x => x.id === state.activePlayerId + 1)};
         }
     case GameSettingsActionsTypes.SetActiveRound:
         return {...state, activeRound: state.activeRound + 1};
@@ -38,7 +41,9 @@ export function gameSettingsReducer(state = initialState, action: GameSettingsAc
                     return player;
                 }
             })
-        }
+        };
+    case GameSettingsActionsTypes.SetLangage:
+        return {...state, langage: action.payload}
     default:
         return state;
   }

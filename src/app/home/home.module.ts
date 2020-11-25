@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PlayerListModule } from '../player-list/player-list.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { PostItModule } from '../post-it/post-it.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -17,6 +18,8 @@ import { ButtonModule } from 'primeng/button';
     ButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    PlayerListModule,
+    PostItModule,
     BrowserModule,
     FontAwesomeModule,
     DropdownModule
