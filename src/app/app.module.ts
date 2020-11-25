@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import * as fromStore from './store/skribbl.selector';
 import { AppComponent } from './app.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeModule } from './home/home.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -18,6 +17,7 @@ import { DrawingModule } from './drawing/drawing.module';
 import { PlayerListModule } from './player-list/player-list.module';
 import { EndOfGameModule } from './end-of-game/end-of-game.module';
 import { EndOfGameComponent } from './end-of-game/end-of-game.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const appRouteList: Routes = [
   {
@@ -56,8 +56,8 @@ export const appRouteList: Routes = [
     DrawingModule,
     PlayerListModule,
     BrowserAnimationsModule,
-    ChooseWordModule,
     FontAwesomeModule,
+    ChooseWordModule,
     EndOfGameModule,
     HomeModule,
     RouterModule.forRoot(appRouteList),
