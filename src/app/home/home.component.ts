@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select} from '@ngrx/store';
-import { selectRoundNumber } from '../store/skribbl.selector';
+import { selectRoundNumber, selectTime } from '../store/skribbl.selector';
 import { SetPlayer, SetRound, SetTime } from '../store/actions/game-actions';
 import { GameState } from '../store/skribbl.selector';
-import { faPlay, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,8 +18,9 @@ export class HomeComponent implements OnInit {
   public roundTime: Array<{label: string, value: any}>;
   public pName: string = '';
   public selectedRoundNumber: Observable<number>;
+  public selectedTime: Observable<number>;
+  public hoveredTime;
 
-  public faPlay = faPlay;
   public faPlus = faPlus;
 
   constructor(private store: Store<GameState>) { }
@@ -49,6 +50,8 @@ export class HomeComponent implements OnInit {
       {label:'240', value: 240},
     ];
     this.selectedRoundNumber = this.store.pipe(select(selectRoundNumber));
+    this.selectedTime = this.store.pipe(select(selectTime));
+    this.hoveredTime = this.selectedTime;
   }
 
   setRoundNumber(val: number) {
@@ -67,4 +70,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  overInHourglass(time) {
+    this.hoveredTime = time;
+  }
+
+  overOutHourglass() {
+    this.hoveredTime = this.selectedTime;
+  }
 }

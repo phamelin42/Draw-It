@@ -1,20 +1,43 @@
 <section class="content">
     <header><h1 class="drou">Drou&nbsp;</h1><h1 class="it">it</h1></header>
     <article class="settings">
-        <h3>Amount of rounds: {{selectedRoundNumber | async}}</h3>
-        <ul class="rounds_container">
-        	<li *ngFor="let number of roundNumber" [ngClass]="{'selected': number.value === (selectedRoundNumber | async) }" class="round_number" (click)="setRoundNumber(number.value)">
-                {{number.label}}
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="70" width="40" x ="0" y="0" viewBox="-50 36 290 200" preserveAspectRatio="none">
-                    <path d="m131.55539,49.6875c-108.25,-5 -177.5,155.125 -79.25,158.875c98.25,3.75 195.375,-125.25 86.75,-151.3125"/>
-                </svg>
-            </li>
-        </ul>
-        <label>Duration of one round<p-dropdown (onChange)="setRoundTime($event.value)" [options]="roundTime"></p-dropdown></label>
+        <menu>
+            <h2>Amount of rounds: </h2>
+            <ul class="rounds_container">
+                <li *ngFor="let number of roundNumber" [ngClass]="{'selected': number.value === (selectedRoundNumber | async) }" class="round_number" (click)="setRoundNumber(number.value)">
+                    {{number.label}}
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="60" width="60" x ="0" y="0" viewBox="-50 36 290 200" preserveAspectRatio="none">
+                        <path d="m131.55539,49.6875c-108.25,-5 -177.5,155.125 -79.25,158.875c98.25,3.75 195.375,-125.25 86.75,-151.3125"/>
+                    </svg>
+                </li>
+            </ul>
+        </menu>
+        <menu>
+            <div class="duration_title">
+                <h2>Duration of a round:</h2>
+                <h2>{{selectedTime | async}}s</h2>
+            </div>
+            <ul class="timer_container">
+                <li *ngFor="let timer of roundTime" [ngClass]="{'selected': (timer.value <= (selectedTime | async)) || (timer.value <= hoveredTime) }" class="hourglass" (click)="setRoundTime(timer.value)"   (mouseover)='overInHourglass(timer.value)' (mouseout)='overOutHourglass()'
+                >
+                    <img src="./assets/hourglass.png"/>
+                </li>
+            </ul>
+        </menu>
+        <menu class="who_plays">
+            <h2>Who is playing ?</h2>
+            <form (submit)="setPlayer(player.value, $event)" class="players">
+                <input maxLength="25" name="name" #player type="text" [(ngModel)]="pName" placeholder="Me !">
+                <span class="plus_container" (click)="setPlayer(player.value)"></span>
+            </form>
+        </menu>
     </article>
-    <form (submit)="setPlayer(player.value, $event)" class="players">
-        <input maxLength="25" name="name" #player type="text" [(ngModel)]="pName">
-        <button (click)="setPlayer(player.value)" type="button" label="Add player"><span>Add Player <fa-icon [icon]="faPlus"></fa-icon></span></button>
-    </form>
-    <a routerLink="/choose-word" class="play">Let's go ! <fa-icon [icon]="faPlay"></fa-icon></a>
+    <footer class="lets_play">
+        <div class="arrow_container">
+            <span class="arrow">
+                <a routerLink="/choose-word" class="play">Let's go !</a>
+            </span>
+            <span class="radiance"></span>
+        </div>
+    </footer>
 </section>

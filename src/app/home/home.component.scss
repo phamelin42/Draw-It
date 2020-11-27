@@ -5,8 +5,9 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    padding: 26px;
     header {
         display: flex;
         .it {
@@ -15,10 +16,11 @@
     }
     .settings {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         width: 100%;
         justify-content: space-evenly;
         flex-direction: column;
+
         label {
             display: flex;
             align-items: center;
@@ -28,18 +30,25 @@
             }
         }
 
-        .rounds_container {
+        menu {
+            padding: 0;
+            width: 100%;
+        }
+
+        .rounds_container, .timer_container {
             display: flex;
-            .round_number {
-                font-size: 3em;
+            justify-content: space-between;
+
+            .round_number, .hourglass {
+                font-size: 2.4em;
                 margin: 12px;
                 opacity: .3;
                 cursor: pointer;
                 position: relative;
                 svg {
                     fill: none;
-                    stroke: $border;
-                    stroke-width: 16;
+                    stroke: $textOnPrimary;
+                    stroke-width: 12;
                     stroke-miterlimit: 10;
                     stroke-dasharray: 550;
                     stroke-dashoffset: 550;
@@ -47,48 +56,131 @@
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    width: calc(100% + 60px);
                     opacity: 0;
                     transform: translate(-50%, -50%);
                     transition: stroke-dashoffset 0s 0.2s, opacity .05s;
                 }
-                &:hover {
+                &:hover, &.selected {
                     transform: scale(1.2);
-                    svg {
-                        stroke-dashoffset: 0;
-                        opacity: 1;
-                        transition: opacity 0s, stroke-dashoffset 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-                    }
-                }
-                &.selected {
                     opacity: 1;
+                }
+                &.selected svg {
+                    stroke-dashoffset: 0;
+                    opacity: 1;
+                    transition: opacity 0s, stroke-dashoffset 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                }
+                img {
+                    height: 66px;
+                }
+            }
+            .hourglass {
+                margin: 12px 4px;
+                &:hover, &.selected {
+                    transform: none;
                 }
             }
         }
+        .duration_title {
+            display: flex;
+            justify-content: space-between;
+            
+        }
     }
+
     .players {
         display: flex;
+        margin-top: 10px;
         button {
             font-family: $font;
         }
         input {
-            border-radius: 2rem;
-            border: 1px solid #00754b;
             outline: none;
-            text-align: center;
+            text-align: left;
+            padding: 14px 12px 8px;
+            color: $textOnPrimary;
             width: 12em;
             font-weight: 600;
             font-size: 1.5em;
+            border: none;
+            background-color: unset;
+            background-image: url("../../assets/custom_input.png");
+            background-size: 100% 100%;
+            
+            &::placeholder { 
+                color: $textOnPrimary;
+                opacity: .6;
+                font-weight: normal;
+            }
+        }
+        .plus_container {
+            height: 46px;
+            width: 46px;
+            cursor: pointer;
+            margin-left: 10px;
+            margin-top: 6px;
+            background-image: url("../../assets/plus.png");
+            background-size: 100%;
+
+            &:active, &:focus {
+                background-image: url("../../assets/plus_down.png");
+            }
         }
     }
-    .play {
-        font-size: 2em; 
-        //font-size: 4em; 
-        fa-icon {
-            font-size: 0.5em;
+    .lets_play {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+
+        .arrow_container {
+            height: 180px;
+            width: 320px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: -20px;
+            margin-bottom: -20px;
+            cursor: pointer;
+
+            .arrow {
+                height: 96px;
+                width: 220px;
+                background-image: url("../../assets/arrow.png");
+                background-size: 100% 100%;
+                display: flex;
+                align-items: center;
+
+                .play {
+                    font-size: 1.7em; 
+                    text-decoration: none;
+                    outline: none;
+                    color: $textOnPrimary;
+                    padding-bottom: 16px;
+                    padding-left: 40px;
+                }
+            }
+            .radiance {
+                opacity: 0;
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+                background-image: url("../../assets/radiance.gif");
+                background-size: 100% 100%;
+            }
+
+            &:hover .radiance {
+                opacity: 1;
+            }
+
+            &:active .arrow, &:focus .arrow {
+                background-image: url("../../assets/arrow_down.png");
+                .play {
+                    padding-bottom: 0px;
+                    padding-top: 10px;
+                }
+            }
         }
-    }
-    label {
-        cursor: pointer;
     }
 }
