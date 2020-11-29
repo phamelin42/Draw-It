@@ -1,15 +1,17 @@
 <article class="container">
   <!-- <app-player-list></app-player-list> -->
     <section id="backdrop" class="outlet content">
-      <aside class="rings">
-      </aside>
-      <div class="page">
-        <router-outlet #o="outlet"></router-outlet>
-      </div>
-      <aside class="shadow">
-      </aside>
       <aside class="player_list">
         <app-player-list></app-player-list>
       </aside>
+      <section class="notebook">
+        <aside class="rings">
+        </aside>
+        <div class="page">
+          <router-outlet #o="outlet"></router-outlet>
+        </div>
+        <aside class="shadow">
+        </aside>
+      </section>
     </section>
 </article>

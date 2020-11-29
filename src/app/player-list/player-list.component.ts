@@ -22,6 +22,7 @@ export class PlayerListComponent implements OnInit, OnDestroy {
   public word: Observable<string>;
   public actualRound: Observable<number>;
   public totalRound: Observable<number>;
+  public rotation: Array<number>;
   constructor(private store: Store<GameState>, public router: Router) { }
 
   ngOnInit(): void {
@@ -33,9 +34,16 @@ export class PlayerListComponent implements OnInit, OnDestroy {
     this.actualRound = this.store.pipe(select(selectActiveRound));
     this.playerList = this.store.pipe(select(selectPlayerList)).pipe(
       map((x: Array<Player>) => {
-        return [x.slice(0, 5), x.slice(5, 10), x.slice(10, 15)];
+        const result: Array<Array<Player>> = [];
+        for (let i = 0; i < x.length; i++) {
+          if (i % 4 === 0) {
+            result.push(x.slice(i, i + 4));
+          }
+        }
+        return result;
       })
     );
+    this.rotation = [this.getRandomNumber(),this.getRandomNumber(),this.getRandomNumber(),this.getRandomNumber(),this.getRandomNumber(),this.getRandomNumber(),]
     this.restartInterval = setInterval(() => {
       if (this.winner === true) {
         if (this.roundRestart > 0) {
@@ -58,6 +66,10 @@ export class PlayerListComponent implements OnInit, OnDestroy {
       this.winner = true;
       this.store.dispatch(new GivePoint(player.id));
     }
+  }
+
+  getRandomNumber() {
+    return Math.floor(Math.random() * (45 - -45) + -45);
   }
 
 }

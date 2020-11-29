@@ -3,7 +3,6 @@ export interface GameSettings {
     durationOfRound: number;
     players: Array<Player>;
     activeRound: number;
-    activePlayer: Player;
     activePlayerId: number;
     selectedWord: string;
     langage: 'FR' | 'EN';

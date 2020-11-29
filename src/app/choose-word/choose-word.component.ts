@@ -38,6 +38,7 @@ export class ChooseWordComponent implements OnInit, OnDestroy {
         this.pickTimeLeft--;
       }}, 1000);
       this.activePlayer = this.store.pipe(select(selectActivePlayer));
+      this.activePlayer.subscribe(x => console.log(x));
   }
 
   chooseWord(word) {

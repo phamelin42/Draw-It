@@ -1,5 +1,5 @@
 <aside class="container">
-    <app-post-it *ngFor="let postItList of (playerList | async)" [ngClass]="(postItList.length === 0) ? '' : 'show' ">
+    <app-post-it *ngFor="let postItList of (playerList | async); let i = index" [style]="{'transform': 'rotate(' + rotation[i] + 'deg)' }">
         <ul class="player_list">
             <li (click)="givePoint(player)" *ngFor="let player of postItList" [ngClass]="(player.id === (activePlayer | async)) ? 'active' : ''" class="player">
                 <h2>{{player.name}}</h2>

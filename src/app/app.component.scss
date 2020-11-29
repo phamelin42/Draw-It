@@ -2,18 +2,15 @@
     height: 100vh;
     background-image: url('../assets/wood_background.jpg');
     background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 3em;
-    section {
+    .content {
         width: 100%;
         height: 100%;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-left: 20%;
+        display: grid;
+        grid-template-columns: 40% 60%;
+        .notebook {
+            display: flex;
+        }
         .rings {
             height: 100%;
             width: 4em;
@@ -24,12 +21,12 @@
         }
         .page {
             height: 100%;
-            width: calc(60% - 5em);
+            width: calc(100% - 5em);
             background-size: cover;
             background-position: left;
             background-repeat: no-repeat;
             background-image: url('../assets/page.png');
-            z-index: 2;
+            position: relative;
         }
         .shadow {
             height: 100%;
@@ -40,14 +37,8 @@
             background-image: url('../assets/shadows.png');
         }
         .player_list {
-            position: absolute;
-            left: 0;
+            width: 100%;
+            height: 100%;
         }
     }
-}
-
-.content {
-    display: flex;
-    justify-content: left;
-    align-items: center;
 }

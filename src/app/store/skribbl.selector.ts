@@ -31,7 +31,7 @@ export const selectTime = createSelector(gameData, (state) => state.gameSettings
 export const selectPlayerList = createSelector(gameData, (state) => state.gameSettings.players);
 
 export const selectActivePlayerId = createSelector(gameData, (state) => state.gameSettings.activePlayerId);
-export const selectActivePlayer = createSelector(gameData, (state) => state.gameSettings.activePlayer);
+export const selectActivePlayer = createSelector(gameData, (state) => state.gameSettings.players.find(player => player.id === state.gameSettings.activePlayerId));
 export const selectActiveRound = createSelector(gameData, (state) => state.gameSettings.activeRound);
 
 export const selectOrderedListByScore = createSelector(selectPlayerList, (players) => {
