@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { GameState } from '../store/skribbl.selector';
+import { Observable, Subscription } from 'rxjs';
+import { GameState, selectActivePlayer } from '../store/skribbl.selector';
 import WordListJson from '../../assets/word_list.json'
 import { Router } from '@angular/router';
 import { SelectWord } from '../store/actions/game-actions';
+import { Player } from '../models/game-settings.model';
 
 @Component({
   selector: 'app-choose-word',
@@ -16,6 +17,7 @@ export class ChooseWordComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
   public wordList: Array<string> = [];
   public wordSelectInterval: any;
+  public activePlayer: Observable<Player>;
   public pickTimeLeft: number;
   constructor(private store: Store<GameState>, private router: Router) { }
 
@@ -35,6 +37,8 @@ export class ChooseWordComponent implements OnInit, OnDestroy {
       } else {
         this.pickTimeLeft--;
       }}, 1000);
+      this.activePlayer = this.store.pipe(select(selectActivePlayer));
+      this.activePlayer.subscribe(x => console.log(x));
   }
 
   chooseWord(word) {

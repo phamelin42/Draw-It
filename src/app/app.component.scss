@@ -1,8 +1,44 @@
 .container {
-    display: grid;
-    grid-template-columns: 20% 80%;
     height: 100vh;
-    background-image: url('../assets/seamless-wood-texture-5.png');
+    background-image: url('../assets/wood_background.jpg');
     background-size: cover;
-    overflow: hidden;
+    padding: 3em;
+    .content {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 40% 60%;
+        .notebook {
+            display: flex;
+        }
+        .rings {
+            height: 100%;
+            width: 4em;
+            background-size: contain;
+            background-position: right;
+            background-repeat: no-repeat;
+            background-image: url('../assets/notebook_rings.png');
+        }
+        .page {
+            height: 100%;
+            width: calc(100% - 5em);
+            background-size: cover;
+            background-position: left;
+            background-repeat: no-repeat;
+            background-image: url('../assets/page.png');
+            position: relative;
+        }
+        .shadow {
+            height: 100%;
+            width: 1em;
+            background-size: contain;
+            background-position: left;
+            background-repeat: no-repeat;
+            background-image: url('../assets/shadows.png');
+        }
+        .player_list {
+            width: 100%;
+            height: 100%;
+        }
+    }
 }

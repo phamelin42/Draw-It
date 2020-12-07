@@ -5,6 +5,7 @@ export interface GameSettings {
     activeRound: number;
     activePlayerId: number;
     selectedWord: string;
+    langage: 'FR' | 'EN';
 }
 
 export interface Player {

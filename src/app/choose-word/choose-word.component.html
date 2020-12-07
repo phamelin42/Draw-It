@@ -1,14 +1,14 @@
-<div class="container">
-    <h1 class="timeLeft">Il vous reste {{pickTimeLeft}} secondes pour choisir un mot !</h1>
+<div class="content">
+    <h1 *ngIf="(activePlayer | async) as player" class="timeLeft">It's {{player.name}}'s turn to draw !</h1>
     <div class="warning_word">
-        <h1>Choisissez entre les 3 mots suivants</h1>
-        <h2 class="ps">(Seule la personne qui dessine doit regarder !)</h2>
+        <h1>Choose between the next 3 words</h1>
+        <h2 class="ps">(Care, only you must see those words)</h2>
     </div>
     <ul>
         <li class="menu_link" (click)="chooseWord(word)" *ngFor="let word of wordList">
             {{word | titlecase}}
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 152.9 43.4" style="enable-background:new 0 0 152.9 43.4;" xml:space="preserve">
-                <path d="M151.9,13.6c0,0,3.3-9.5-85-8.3c-97,1.3-58.3,29-58.3,29s9.7,8.1,69.7,8.1c68.3,0,69.3-23.1,69.3-23.1 s1.7-10.5-14.7-18.4"/>
+                <path d="M 151.9,13.6c0,0,3.3-9.5-85-8.3c-97,1.3-58.3,29-58.3,29s9.7,8.1,69.7,8.1c68.3,0,69.3-23.1,69.3-23.1 s1.7-10.5-14.7-18.4"/>
             </svg>
         </li>
     </ul>

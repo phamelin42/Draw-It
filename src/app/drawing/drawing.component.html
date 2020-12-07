@@ -1,4 +1,4 @@
-<section class="container">
+<section class="content">
     <span class="word">
         <p *ngFor="let letter of (wordObs | async).split(''); let i = index">
             <ng-container *ngIf="letter && letter !== ' ' && clues.includes(i)">{{letter}}</ng-container>
